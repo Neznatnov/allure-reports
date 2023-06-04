@@ -18,11 +18,9 @@ public class WebSteps {
         open("https://github.com/");
     }
 
-    @Step("Ищем профиль {profile}")
-    public void searchForProfile(String profile) {
-        $(".header-search-input").click();
-        $(".header-search-input").sendKeys(profile);
-        $(".header-search-input").submit();
+    @Step("Ищем репозиторий {repo}")
+    public void searchForRepository(String repo) {
+        $(".header-search-input").setValue(repo).submit();
     }
 
     @Step("Кликаем по ссылке репозитория {repo}")
@@ -30,9 +28,14 @@ public class WebSteps {
         $(linkText(repo)).click();
     }
 
-    @Step("Проверка названия 'Issues' в репозитории")
-    public void checkingTitleInRepository() {
-        $("#repository-container-header").shouldHave(text("Issues"));
+    @Step("Открываем таб Issues")
+    public void openIssuesTab() {
+        $("#issues-tab").click();
+    }
+
+    @Step("Проверяем, что для issue#{issueNumber} отображается название: {issueName}")
+    public void checkNameForIssueWithNumber(String issueNumber, String issueName) {
+        $(String.format("#issue_%s_link", issueNumber)).shouldHave(text(issueName));
     }
 
     @Attachment(value = "Screenshot", type = "image/png", fileExtension = "png")

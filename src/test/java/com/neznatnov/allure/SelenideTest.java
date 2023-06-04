@@ -17,10 +17,9 @@ public class SelenideTest {
 
         SelenideLogger.addListener("allure", new AllureSelenide());
         open("https://github.com/");
-        $(".header-search-input").click();
-        $(".header-search-input").sendKeys("neznatnov/");
-        $(".header-search-input").submit();
-        $(linkText("Neznatnov/allure-reports")).click();
-        $("#repository-container-header").shouldHave(text("Issues"));
+        $(".header-search-input").setValue("eroshenkoam/allure-example").submit();
+        $(linkText("eroshenkoam/allure-example")).click();
+        $("#issues-tab").click();
+        $(String.format("#issue_%s_link", "81")).shouldHave(text("issue_to_test_allure_report"));
     }
 }

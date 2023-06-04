@@ -6,8 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class WebStepsTest {
-    public static final String PROFILE = "neznatnov/";
-    public static final String REPOSITORY = "Neznatnov/allure-reports";
+    public static final String REPOSITORY = "eroshenkoam/allure-example";
 
     @Test
     @DisplayName("Шаги с аннотацией @Step")
@@ -15,9 +14,10 @@ public class WebStepsTest {
         SelenideLogger.addListener("allure", new AllureSelenide());
         WebSteps steps = new WebSteps();
         steps.openMainPage();
-        steps.searchForProfile(PROFILE);
+        steps.searchForRepository(REPOSITORY);
         steps.clickOnRepositoryLink(REPOSITORY);
-        steps.checkingTitleInRepository();
+        steps.openIssuesTab();
+        steps.checkNameForIssueWithNumber("81", "issue_to_test_allure_report");
         steps.takeScreenshot();
     }
 }

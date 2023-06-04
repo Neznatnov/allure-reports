@@ -14,8 +14,8 @@ import static org.openqa.selenium.By.linkText;
 
     public class StepsTest {
 
-        public static final String PROFILE = "neznatnov/";
-        public static final String REPOSITORY = "Neznatnov/allure-reports";
+        public static final String PROFILE = "eroshenkoam/";
+        public static final String REPOSITORY = "eroshenkoam/allure-example";
 
         @Test
         @Feature("'Issues' в репозитории")
@@ -44,10 +44,14 @@ import static org.openqa.selenium.By.linkText;
                 $(linkText(REPOSITORY)).click();
             });
 
-            step("Проверка названия 'Issues' в репозитории", () -> {
-                $("#repository-container-header").shouldHave(text("Issues"));
+            step("Кликаем на вкладку Issue", () -> {
+                $("#issues-tab").click();
             });
 
+            step("Проверка названия наличия элемента во вкладке Issue", () -> {
+                $(String.format("#issue_%s_link", "81")).shouldHave(text("issue_to_test_allure_report"));
+
+            });
         }
     }
 
